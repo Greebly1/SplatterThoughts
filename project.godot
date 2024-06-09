@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Splatter Thoughts Pre Production"
-run/main_scene="res://paint_2.tscn"
+run/main_scene="res://paint.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 
 [input]
 
