@@ -1,0 +1,37 @@
+[gd_scene load_steps=9 format=3 uid="uid://b3c7hw3agugfc"]
+
+[ext_resource type="Shader" path="res://Inkblot.gdshader" id="1_vuhmu"]
+[ext_resource type="Texture2D" uid="uid://c550uu12a0uqi" path="res://icon.svg" id="2_cj6tp"]
+[ext_resource type="Texture2D" uid="uid://c51to1gepsypv" path="res://BlackDot.png" id="2_vrbvp"]
+[ext_resource type="Shader" path="res://Rorshacke.gdshader" id="3_w3s6a"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_efahl"]
+noise_type = 2
+frequency = 0.0222
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bf6hu"]
+width = 350
+height = 350
+noise = SubResource("FastNoiseLite_efahl")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pdb4f"]
+shader = ExtResource("1_vuhmu")
+shader_parameter/power = 0.06
+shader_parameter/inputImage = ExtResource("2_cj6tp")
+shader_parameter/fractalNoise = SubResource("NoiseTexture2D_bf6hu")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_07nl7"]
+shader = ExtResource("3_w3s6a")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_pdb4f")
+position = Vector2(88, 75)
+texture = ExtResource("2_cj6tp")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_07nl7")
+position = Vector2(233, 75)
+scale = Vector2(0.455576, 0.418999)
+texture = ExtResource("2_vrbvp")

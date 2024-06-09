@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://obfqdbyu723p"]
+
+[ext_resource type="Texture2D" uid="uid://c2vxcmw4ibop" path="res://WhiteDot512.png" id="1_ovt1b"]
+[ext_resource type="Script" path="res://precompute.gd" id="1_pakvy"]
+[ext_resource type="Shader" path="res://PostProcessBlob.gdshader" id="2_tca01"]
+
+[sub_resource type="Gradient" id="Gradient_6wl2i"]
+offsets = PackedFloat32Array(0.0779221, 0.939394)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hrk32"]
+frequency = 0.0199
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uqw4l"]
+color_ramp = SubResource("Gradient_6wl2i")
+noise = SubResource("FastNoiseLite_hrk32")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f0u0l"]
+shader = ExtResource("2_tca01")
+shader_parameter/power = 0.02
+shader_parameter/displaceNoise = SubResource("NoiseTexture2D_uqw4l")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_18cn4"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Precompute" type="Control" node_paths=PackedStringArray("mainView", "paintBuffer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pakvy")
+mainView = NodePath("TextureRect")
+paintBuffer = NodePath("SubViewport")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport"]
+texture = ExtResource("1_ovt1b")
+centered = false
+
+[node name="ColorRect" type="ColorRect" parent="SubViewport"]
+material = SubResource("ShaderMaterial_f0u0l")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_18cn4")

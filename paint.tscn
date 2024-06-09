@@ -1,0 +1,90 @@
+[gd_scene load_steps=13 format=3 uid="uid://df708yps34pqq"]
+
+[ext_resource type="Script" path="res://PaintTest.gd" id="1_3yfxo"]
+[ext_resource type="Texture2D" uid="uid://5841oq4xcikv" path="res://paper.jpg" id="2_5mwme"]
+[ext_resource type="Shader" path="res://invertCanvas.gdshader" id="2_l7eda"]
+[ext_resource type="Shader" path="res://PostProcessBlob.gdshader" id="3_bkxuk"]
+[ext_resource type="Texture2D" uid="uid://bvpy6q3jj5lfv" path="res://WhiteDot.png" id="3_echl7"]
+[ext_resource type="Script" path="res://followCursor.gd" id="5_5gilb"]
+
+[sub_resource type="Gradient" id="Gradient_eclph"]
+colors = PackedColorArray(0.273873, 0.273873, 0.273873, 1, 0.707967, 0.707966, 0.707966, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vefgt"]
+frequency = 0.0185
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8ejrk"]
+width = 1024
+height = 1024
+color_ramp = SubResource("Gradient_eclph")
+noise = SubResource("FastNoiseLite_vefgt")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vkehk"]
+shader = ExtResource("3_bkxuk")
+shader_parameter/power = 0.01
+shader_parameter/displaceNoise = SubResource("NoiseTexture2D_8ejrk")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iia6e"]
+shader = ExtResource("2_l7eda")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_i2xho"]
+viewport_path = NodePath("SubViewportContainer/SubViewport")
+
+[node name="Control" type="Control" node_paths=PackedStringArray("mainView", "paintBuffer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3yfxo")
+mainView = NodePath("TextureRect")
+paintBuffer = NodePath("SubViewportContainer/SubViewport")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Dot" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_echl7")
+script = ExtResource("5_5gilb")
+
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport"]
+material = SubResource("ShaderMaterial_vkehk")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5mwme")
+expand_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_iia6e")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_i2xho")
