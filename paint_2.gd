@@ -2,16 +2,14 @@ extends Control
 
 signal paint(position: Vector2)
 
-@export
-var paintBuffer : SubViewport
-@export
-var flowDistance : float = 20
-
+@export var paintBuffer : SubViewport
+@export var flowDistance : float = 20
 var brushActive : bool = false
 var last_splotch_position : Vector2 = Vector2(0,0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Engine.max_fps = 150
 	paintBuffer.render_target_clear_mode = SubViewport.CLEAR_MODE_NEVER
 	pass # Replace with function body.
 

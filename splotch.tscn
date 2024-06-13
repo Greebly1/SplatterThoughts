@@ -1,12 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bowj3q1lwyvuy"]
+[gd_scene load_steps=3 format=3 uid="uid://bowj3q1lwyvuy"]
 
-[ext_resource type="VideoStream" path="res://videos/paintSplat1.ogv" id="1_7weu1"]
 [ext_resource type="Script" path="res://Splotch.gd" id="2_jutjs"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7vf3i"]
-blend_mode = 1
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_la3sg"]
 blend_mode = 1
 
 [node name="Splotch" type="Control"]
@@ -17,14 +13,11 @@ offset_right = 512.0
 offset_bottom = 512.0
 scale = Vector2(0.5, 0.5)
 script = ExtResource("2_jutjs")
+time_to_live = 1.0
 
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
-material = SubResource("CanvasItemMaterial_la3sg")
-layout_mode = 0
-offset_left = -128.0
-offset_top = -128.0
-offset_right = 384.0
-offset_bottom = 384.0
-scale = Vector2(0.5, 0.5)
-stream = ExtResource("1_7weu1")
-autoplay = true
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0

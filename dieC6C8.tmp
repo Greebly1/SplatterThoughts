@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwasdxyba3kqk"]
+
+[ext_resource type="Texture2D" uid="uid://c2vxcmw4ibop" path="res://WhiteDot512.png" id="1_0vljd"]
+[ext_resource type="Script" path="res://Testsplotch.gd" id="2_usoom"]
+
+[node name="Sprite2D" type="Sprite2D"]
+texture = ExtResource("1_0vljd")
+offset = Vector2(59.86, 91.83)
+script = ExtResource("2_usoom")

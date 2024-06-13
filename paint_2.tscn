@@ -4,7 +4,7 @@
 [ext_resource type="Shader" path="res://invertCanvas.gdshader" id="2_8p0u1"]
 [ext_resource type="Texture2D" uid="uid://5841oq4xcikv" path="res://paper.jpg" id="2_qx7fq"]
 [ext_resource type="PackedScene" uid="uid://bowj3q1lwyvuy" path="res://splotch.tscn" id="4_2up6v"]
-[ext_resource type="Script" path="res://paintbuffer.gd" id="4_qovt8"]
+[ext_resource type="Script" path="res://PaintingCanvas.gd" id="4_qovt8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fdfqn"]
 shader = ExtResource("2_8p0u1")

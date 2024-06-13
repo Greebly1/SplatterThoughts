@@ -1,15 +1,13 @@
-extends Control
+extends SubViewport
 
-@export
-var mainView : TextureRect
+var splotch = preload("res://dieInstantly.tscn")
 
-@export
-var paintBuffer : SubViewport
+var fuckthis
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Engine.max_fps = 120
-	paintBuffer.render_target_clear_mode = SubViewport.CLEAR_MODE_NEVER;
+	fuckthis = splotch.instantiate()
+	add_child(fuckthis)
 	pass # Replace with function body.
 
 

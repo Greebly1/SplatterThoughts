@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://crdafxad0301t"]
+
+[ext_resource type="Script" path="res://paint_3.gd" id="1_dssfa"]
+[ext_resource type="Texture2D" uid="uid://5841oq4xcikv" path="res://paper.jpg" id="1_e2x1s"]
+[ext_resource type="Script" path="res://CanvasManager.gd" id="3_c6ium"]
+[ext_resource type="Script" path="res://PaintingCanvas.gd" id="3_kblqc"]
+[ext_resource type="Texture2D" uid="uid://c550uu12a0uqi" path="res://icon.svg" id="4_f402b"]
+
+[node name="Paint3" type="Control" node_paths=PackedStringArray("canvas_manager")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dssfa")
+canvas_manager = NodePath("CanvasManager")
+
+[node name="CanvasManager" type="Control" parent="." node_paths=PackedStringArray("all_canvases")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_c6ium")
+all_canvases = [NodePath("SubViewport1"), NodePath("SubViewport2"), NodePath("SubViewport3"), NodePath("SubViewport4")]
+
+[node name="SubViewport1" type="SubViewport" parent="CanvasManager"]
+script = ExtResource("3_kblqc")
+
+[node name="SubViewport2" type="SubViewport" parent="CanvasManager"]
+script = ExtResource("3_kblqc")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasManager/SubViewport2"]
+texture = ExtResource("4_f402b")
+
+[node name="SubViewport3" type="SubViewport" parent="CanvasManager"]
+script = ExtResource("3_kblqc")
+
+[node name="SubViewport4" type="SubViewport" parent="CanvasManager"]
+script = ExtResource("3_kblqc")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_e2x1s")
+expand_mode = 2
+
+[node name="LayerContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
