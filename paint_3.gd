@@ -2,6 +2,7 @@ extends Control
 
 @export var canvas_manager : CanvasManager
 @export var flowDistance : float = 20
+@export var layerMaterial : Material
 var layers : Array[TextureRect] = []
 var last_splotch_position : Vector2 = Vector2(0,0)
 var brushActive : bool = false
@@ -42,10 +43,12 @@ func preparePainting():
 	$LayerContainer.add_child(newLayer)
 	newLayer.set_anchors_preset(Control.PRESET_FULL_RECT)
 	newLayer.size = $LayerContainer.size #set new layer to full size of screen
+	newLayer.material = layerMaterial
 	layers.append(newLayer)
 	
 	#get a painting canvas handle
 	currentCanvas = canvas_manager.get_empty_canvas()
+	currentCanvas.isCaptured = true
 	
 	#set the new layer's texture to a viewport of the current canvas
 	newLayer.texture = currentCanvas.get_viewport().get_texture()
