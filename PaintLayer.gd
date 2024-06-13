@@ -18,7 +18,6 @@ func ReleaseCanvas():
 	#first save the canvas' texture to a file
 	var img = canvas.get_viewport().get_texture().get_image() #canvases are subviewports, 
 	#viewports have viewport textures -> texture2D -> images are the image data
-	img.flip_y()
 	
 	layer_texture = ImageTexture.create_from_image(img)
 	

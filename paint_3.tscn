@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dvjn3d6nspqxr"]
+[gd_scene load_steps=7 format=3 uid="uid://dvjn3d6nspqxr"]
 
 [ext_resource type="Script" path="res://paint_3.gd" id="1_dssfa"]
 [ext_resource type="Texture2D" uid="uid://5841oq4xcikv" path="res://paper.jpg" id="1_e2x1s"]
 [ext_resource type="Shader" path="res://invertCanvas.gdshader" id="2_ggeid"]
 [ext_resource type="Script" path="res://CanvasManager.gd" id="3_c6ium"]
-[ext_resource type="Script" path="res://PaintingCanvas.gd" id="3_kblqc"]
-[ext_resource type="Texture2D" uid="uid://c550uu12a0uqi" path="res://icon.svg" id="4_f402b"]
+[ext_resource type="PackedScene" uid="uid://bqtyhv1qssoph" path="res://canvas.tscn" id="4_j2ffb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ud4tg"]
 shader = ExtResource("2_ggeid")
@@ -29,22 +28,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_c6ium")
-all_canvases = [NodePath("SubViewport1"), NodePath("SubViewport2"), NodePath("SubViewport3"), NodePath("SubViewport4")]
+all_canvases = [NodePath("Canvas1"), NodePath("Canvas2"), NodePath("Canvas3"), NodePath("Canvas4"), NodePath("Canvas5")]
 
-[node name="SubViewport1" type="SubViewport" parent="CanvasManager"]
-script = ExtResource("3_kblqc")
+[node name="Canvas1" parent="CanvasManager" instance=ExtResource("4_j2ffb")]
 
-[node name="SubViewport2" type="SubViewport" parent="CanvasManager"]
-script = ExtResource("3_kblqc")
+[node name="Canvas2" parent="CanvasManager" instance=ExtResource("4_j2ffb")]
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasManager/SubViewport2"]
-texture = ExtResource("4_f402b")
+[node name="Canvas3" parent="CanvasManager" instance=ExtResource("4_j2ffb")]
 
-[node name="SubViewport3" type="SubViewport" parent="CanvasManager"]
-script = ExtResource("3_kblqc")
+[node name="Canvas4" parent="CanvasManager" instance=ExtResource("4_j2ffb")]
 
-[node name="SubViewport4" type="SubViewport" parent="CanvasManager"]
-script = ExtResource("3_kblqc")
+[node name="Canvas5" parent="CanvasManager" instance=ExtResource("4_j2ffb")]
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1

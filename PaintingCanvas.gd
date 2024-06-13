@@ -1,6 +1,8 @@
 extends SubViewport
 class_name PaintingCanvas
 
+@onready var inkEffectTimer : Timer = $Timer
+
 #painting canvases are similar to image buffers that we can paint on
 var splotchPrefab = preload("res://dieInstantly.tscn")
 
@@ -30,4 +32,11 @@ func releaseLayer():
 func reset():
 	layer.ReleaseCanvas()
 	layer = null
+	pass
+	
+func beginInk():
+	inkEffectTimer.start()
+
+func inkEnded():
+	layer.ReleaseCanvas()
 	pass

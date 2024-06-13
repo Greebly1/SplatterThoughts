@@ -21,6 +21,7 @@ func _process(delta):
 		# did painting end this frame?
 		if Input.is_action_just_released("click"):
 			brushActive = false # painting ended this frame
+			currentCanvas.beginInk()
 			#TODO before preparing the next layer, tell the canvas that the paint stroke is over
 			preparePainting() #prepare the painting for the next paint stroke
 		else:
@@ -49,6 +50,7 @@ func preparePainting():
 	#get a painting canvas handle
 	currentCanvas = canvas_manager.get_empty_canvas()
 	currentCanvas.isCaptured = true
+	currentCanvas.layer = newLayer
 	
 	#set the new layer's texture to a viewport of the current canvas
 	newLayer.texture = currentCanvas.get_viewport().get_texture()
