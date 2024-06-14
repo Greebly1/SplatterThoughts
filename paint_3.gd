@@ -1,7 +1,7 @@
 extends Control
 
 @export var canvas_manager : CanvasManager
-@export var flowDistance : float = 20
+@export var flowDistance : float = 3
 @export var layerMaterial : Material
 var layers : Array[TextureRect] = []
 var last_splotch_position : Vector2 = Vector2(0,0)

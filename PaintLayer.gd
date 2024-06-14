@@ -25,9 +25,4 @@ func ReleaseCanvas():
 	canvas.isCaptured = false #we dont need that ish no mo
 	canvas = null
 
-func _exit_tree(): 
-	if (canvas.isCaptured && canvas.layer == self):
-		canvas.isCaptured = false
-		canvas.layer = null
-		#TODO tell the canvas to reset
 	

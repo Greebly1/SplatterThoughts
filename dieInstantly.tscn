@@ -4,6 +4,8 @@
 [ext_resource type="Script" path="res://LiveOneFrame.gd" id="2_usoom"]
 
 [node name="Sprite2D" type="Sprite2D"]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.22, 0.22)
 texture = ExtResource("1_0vljd")
+
+[node name="Node" type="Node" parent="."]
 script = ExtResource("2_usoom")

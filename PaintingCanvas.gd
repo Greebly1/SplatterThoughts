@@ -2,6 +2,11 @@ extends SubViewport
 class_name PaintingCanvas
 
 @onready var inkEffectTimer : Timer = $Timer
+@export var inkEffect : PackedScene
+@export var inkStrengthCurve : Curve
+@export var inkEffectLength : float = 1
+@export var inkStrength : float = 0.1
+var canvasClearRect : PackedScene = preload("res://canvas_clear.tscn")
 
 #painting canvases are similar to image buffers that we can paint on
 var splotchPrefab = preload("res://dieInstantly.tscn")
@@ -9,6 +14,9 @@ var splotchPrefab = preload("res://dieInstantly.tscn")
 #whether or not this canvas is currently painting (or applying an effect)
 var isCaptured : bool = false
 var layer : PaintLayer = null #the layer this canvas is currently casting to
+var inkEffectActive : bool = false
+var lastTimeInked : float = 0
+var inkAccumulation : float = 0
 
 func _ready():
 	pass
@@ -35,8 +43,39 @@ func reset():
 	pass
 	
 func beginInk():
+	inkEffectTimer.wait_time = inkEffectLength
 	inkEffectTimer.start()
+	inkEffectActive = true
+	inkAccumulation = 0
+	lastTimeInked = 0
 
 func inkEnded():
 	layer.ReleaseCanvas()
+	clearCanvas()
+	pass
+
+#flashes a color rect to essentially clear the screen
+func clearCanvas():
+	var canvasClear = canvasClearRect.instantiate()
+	add_child(canvasClear)
+	pass
+
+func _process(delta):
+	if (inkEffectActive):
+		#we are doing calculus now
+		#we need to know the area under the ink effect curve, the integral
+		#however, we only need to know how it accumulated since this frame
+		#what we need is the area under the interval between the last frame and this frame (last frame + delta)
+		var adjustedDelta : float = delta / inkEffectLength
+		var thisFrameTime : float = lastTimeInked + adjustedDelta
+		var inkLastFrame : float = inkStrengthCurve.sample(lastTimeInked/inkEffectLength)
+		var inkThisFrame : float = inkStrengthCurve.sample(thisFrameTime/inkEffectLength)
+		var changeAccumulated : float = adjustedDelta * ((inkLastFrame + inkThisFrame)/2) #<-- area under the trapezoidal reimann sum made with this frame's delta time
+		inkAccumulation += changeAccumulated
+		while inkAccumulation >= inkStrength:
+			inkAccumulation -= inkStrength
+			var newInkEffect = inkEffect.instantiate()
+			add_child(newInkEffect)
+		
+		lastTimeInked = thisFrameTime
 	pass
