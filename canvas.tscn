@@ -1,16 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://bqtyhv1qssoph"]
 
 [ext_resource type="Script" path="res://PaintingCanvas.gd" id="1_eu8oj"]
-
-[sub_resource type="Curve" id="Curve_3ox6r"]
-_data = [Vector2(0.0812721, 1), 0.0, 0.0, 0, 0, Vector2(0.268551, 0.954286), -0.495576, -0.495576, 0, 0, Vector2(0.501767, 0.228571), -0.691905, -0.691905, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
+[ext_resource type="Resource" uid="uid://bamy2n1463y3r" path="res://Data/DefaultInk.tres" id="2_cxl7c"]
 
 [node name="Canvas1" type="SubViewport"]
 script = ExtResource("1_eu8oj")
-inkStrengthCurve = SubResource("Curve_3ox6r")
-inkEffectLength = 1.4
-inkStrength = 0.02
+inkEffectData = ExtResource("2_cxl7c")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
