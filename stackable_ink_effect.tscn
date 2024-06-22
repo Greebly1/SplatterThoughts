@@ -6,7 +6,4 @@
 [node name="StackableInkEffect" type="CanvasLayer"]
 
 [node name="ColorRect" parent="." instance=ExtResource("1_2bxwy")]
-
-[node name="Node2" type="Node" parent="ColorRect" node_paths=PackedStringArray("nodeToDestroy")]
 script = ExtResource("2_hnnsy")
-nodeToDestroy = NodePath("..")

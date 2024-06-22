@@ -2,10 +2,7 @@ extends SubViewport
 class_name PaintingCanvas
 
 @onready var inkEffectTimer : Timer = $Timer
-@export var inkEffect : PackedScene
-@export var inkStrengthCurve : Curve
-@export var inkEffectLength : float = 1
-@export var inkStrength : float = 0.1
+@export var inkEffectData : InkEffectData
 var canvasClearRect : PackedScene = preload("res://canvas_clear.tscn")
 
 #painting canvases are similar to image buffers that we can paint on
@@ -43,7 +40,7 @@ func reset():
 	pass
 	
 func beginInk():
-	inkEffectTimer.wait_time = inkEffectLength
+	inkEffectTimer.wait_time = inkEffectData.duration
 	inkEffectTimer.start()
 	inkEffectActive = true
 	inkAccumulation = 0
@@ -66,15 +63,15 @@ func _process(delta):
 		#we need to know the area under the ink effect curve, the integral
 		#however, we only need to know how it accumulated since this frame
 		#what we need is the area under the interval between the last frame and this frame (last frame + delta)
-		var adjustedDelta : float = delta / inkEffectLength
+		var adjustedDelta : float = delta / inkEffectData.duration
 		var thisFrameTime : float = lastTimeInked + adjustedDelta
-		var inkLastFrame : float = inkStrengthCurve.sample(lastTimeInked/inkEffectLength)
-		var inkThisFrame : float = inkStrengthCurve.sample(thisFrameTime/inkEffectLength)
+		var inkLastFrame : float = inkEffectData.strengthCurve.sample(lastTimeInked/inkEffectData.duration)
+		var inkThisFrame : float = inkEffectData.strengthCurve.sample(thisFrameTime/inkEffectData.duration)
 		var changeAccumulated : float = adjustedDelta * ((inkLastFrame + inkThisFrame)/2) #<-- area under the trapezoidal reimann sum made with this frame's delta time
 		inkAccumulation += changeAccumulated
-		while inkAccumulation >= inkStrength:
-			inkAccumulation -= inkStrength
-			var newInkEffect = inkEffect.instantiate()
+		while inkAccumulation >= inkEffectData.strength:
+			inkAccumulation -= inkEffectData.strength
+			var newInkEffect = inkEffectData.effect.instantiate()
 			add_child(newInkEffect)
 		
 		lastTimeInked = thisFrameTime

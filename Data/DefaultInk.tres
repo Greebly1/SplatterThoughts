@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="InkEffectData" load_steps=4 format=3 uid="uid://bamy2n1463y3r"]
+
+[ext_resource type="PackedScene" uid="uid://b6wlfj0v2bb4l" path="res://stackable_ink_effect.tscn" id="1_omubv"]
+[ext_resource type="Script" path="res://InkEffectData.gd" id="1_vewp1"]
+
+[sub_resource type="Curve" id="Curve_wchn8"]
+_data = [Vector2(0, 1), 0.0, 0.0781909, 0, 0, Vector2(0.0940767, 0.986718), -2.76709, -2.76709, 0, 0, Vector2(0.311847, 0.282795), -0.931776, -0.931776, 0, 0, Vector2(1, 0), -0.100329, 0.0, 0, 0]
+point_count = 4
+
+[resource]
+script = ExtResource("1_vewp1")
+effect = ExtResource("1_omubv")
+strengthCurve = SubResource("Curve_wchn8")
+duration = 1.0
+strength = 0.02
