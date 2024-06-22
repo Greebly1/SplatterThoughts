@@ -5,7 +5,7 @@
 [ext_resource type="Shader" path="res://invertCanvas.gdshader" id="2_ggeid"]
 [ext_resource type="Script" path="res://CanvasManager.gd" id="3_c6ium"]
 [ext_resource type="PackedScene" uid="uid://bqtyhv1qssoph" path="res://canvas.tscn" id="4_j2ffb"]
-[ext_resource type="PackedScene" uid="uid://ek1dbpl5lwu8" path="res://InkEffect.tscn" id="5_vvdug"]
+[ext_resource type="PackedScene" uid="uid://b6wlfj0v2bb4l" path="res://stackable_ink_effect.tscn" id="5_y2yxp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ud4tg"]
 shader = ExtResource("2_ggeid")
@@ -32,23 +32,23 @@ script = ExtResource("3_c6ium")
 all_canvases = [NodePath("Canvas1"), NodePath("Canvas2"), NodePath("Canvas3"), NodePath("Canvas4"), NodePath("Canvas5")]
 
 [node name="Canvas1" parent="CanvasManager" instance=ExtResource("4_j2ffb")]
-inkEffect = ExtResource("5_vvdug")
+inkEffect = ExtResource("5_y2yxp")
 inkEffectLength = 1.0
 
 [node name="Canvas2" parent="CanvasManager" instance=ExtResource("4_j2ffb")]
-inkEffect = ExtResource("5_vvdug")
+inkEffect = ExtResource("5_y2yxp")
 inkEffectLength = 1.0
 
 [node name="Canvas3" parent="CanvasManager" instance=ExtResource("4_j2ffb")]
-inkEffect = ExtResource("5_vvdug")
+inkEffect = ExtResource("5_y2yxp")
 inkEffectLength = 1.0
 
 [node name="Canvas4" parent="CanvasManager" instance=ExtResource("4_j2ffb")]
-inkEffect = ExtResource("5_vvdug")
+inkEffect = ExtResource("5_y2yxp")
 inkEffectLength = 1.0
 
 [node name="Canvas5" parent="CanvasManager" instance=ExtResource("4_j2ffb")]
-inkEffect = ExtResource("5_vvdug")
+inkEffect = ExtResource("5_y2yxp")
 inkEffectLength = 1.0
 
 [node name="Background" type="TextureRect" parent="."]
