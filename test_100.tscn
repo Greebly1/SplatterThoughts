@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://dpe7voqhwjgle"]
+
+[ext_resource type="Texture2D" uid="uid://5841oq4xcikv" path="res://paper.jpg" id="1_mhgb0"]
+[ext_resource type="Script" path="res://spawnthing.gd" id="1_yhcio"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_24i2v"]
+blend_mode = 2
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xxaam"]
+viewport_path = NodePath("SubViewportContainer/SubViewport")
+
+[node name="Test100" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(862, 512)
+render_target_clear_mode = 1
+render_target_update_mode = 4
+script = ExtResource("1_yhcio")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_mhgb0")
+expand_mode = 2
+
+[node name="layer001" type="TextureRect" parent="."]
+material = SubResource("CanvasItemMaterial_24i2v")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_xxaam")

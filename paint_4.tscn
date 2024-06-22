@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7tql6s6xer8s"]
+
+[ext_resource type="Script" path="res://paint_4.gd" id="1_tt7cb"]
+[ext_resource type="Shader" path="res://invertCanvas.gdshader" id="2_2cd8o"]
+[ext_resource type="Script" path="res://Paint_4CanvasManager.gd" id="3_c6lah"]
+[ext_resource type="PackedScene" uid="uid://bqtyhv1qssoph" path="res://canvas.tscn" id="4_b0fj2"]
+[ext_resource type="Texture2D" uid="uid://5841oq4xcikv" path="res://paper.jpg" id="6_bsw2f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ts6xw"]
+shader = ExtResource("2_2cd8o")
+
+[node name="Paint4" type="Control" node_paths=PackedStringArray("canvas_manager")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tt7cb")
+canvas_manager = NodePath("CanvasPool")
+flowDistance = 20.0
+layerMaterial = SubResource("ShaderMaterial_ts6xw")
+
+[node name="CanvasPool" type="Control" parent="." node_paths=PackedStringArray("all_canvases")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_c6lah")
+canvas_template = ExtResource("4_b0fj2")
+all_canvases = [NodePath("Canvas1")]
+
+[node name="Canvas1" parent="CanvasPool" instance=ExtResource("4_b0fj2")]
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_bsw2f")
+expand_mode = 2
+
+[node name="LayerContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

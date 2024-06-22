@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwasdxyba3kqk"]
+
+[ext_resource type="Texture2D" uid="uid://c2vxcmw4ibop" path="res://WhiteDot512.png" id="1_0vljd"]
+[ext_resource type="Script" path="res://LiveOneFrame.gd" id="2_usoom"]
+
+[node name="Sprite2D" type="Sprite2D"]
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("1_0vljd")
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("2_usoom")

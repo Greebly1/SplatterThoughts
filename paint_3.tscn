@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://dvjn3d6nspqxr"]
+
+[ext_resource type="Script" path="res://paint_3.gd" id="1_dssfa"]
+[ext_resource type="Texture2D" uid="uid://5841oq4xcikv" path="res://paper.jpg" id="1_e2x1s"]
+[ext_resource type="Shader" path="res://invertCanvas.gdshader" id="2_ggeid"]
+[ext_resource type="Script" path="res://CanvasManager.gd" id="3_c6ium"]
+[ext_resource type="PackedScene" uid="uid://bqtyhv1qssoph" path="res://canvas.tscn" id="4_j2ffb"]
+[ext_resource type="Resource" uid="uid://bamy2n1463y3r" path="res://Data/DefaultInk.tres" id="5_75b8a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ud4tg"]
+shader = ExtResource("2_ggeid")
+
+[node name="Paint3" type="Control" node_paths=PackedStringArray("canvas_manager")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dssfa")
+canvas_manager = NodePath("CanvasManager")
+layerMaterial = SubResource("ShaderMaterial_ud4tg")
+
+[node name="CanvasManager" type="Control" parent="." node_paths=PackedStringArray("all_canvases")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_c6ium")
+all_canvases = [NodePath("Canvas1"), NodePath("Canvas2"), NodePath("Canvas3"), NodePath("Canvas4"), NodePath("Canvas5")]
+
+[node name="Canvas1" parent="CanvasManager" instance=ExtResource("4_j2ffb")]
+inkEffectData = ExtResource("5_75b8a")
+
+[node name="Canvas2" parent="CanvasManager" instance=ExtResource("4_j2ffb")]
+inkEffectData = ExtResource("5_75b8a")
+
+[node name="Canvas3" parent="CanvasManager" instance=ExtResource("4_j2ffb")]
+inkEffectData = ExtResource("5_75b8a")
+
+[node name="Canvas4" parent="CanvasManager" instance=ExtResource("4_j2ffb")]
+inkEffectData = ExtResource("5_75b8a")
+
+[node name="Canvas5" parent="CanvasManager" instance=ExtResource("4_j2ffb")]
+inkEffectData = ExtResource("5_75b8a")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_e2x1s")
+expand_mode = 2
+
+[node name="LayerContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
