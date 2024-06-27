@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://PaintTest.gd" id="1_3yfxo"]
 [ext_resource type="Texture2D" uid="uid://5841oq4xcikv" path="res://paper.jpg" id="2_5mwme"]
-[ext_resource type="Shader" path="res://invertCanvas.gdshader" id="2_l7eda"]
+[ext_resource type="Shader" path="res://LayerMat.gdshader" id="2_l7eda"]
 [ext_resource type="Shader" path="res://PostProcessBlob.gdshader" id="3_bkxuk"]
 [ext_resource type="Texture2D" uid="uid://bvpy6q3jj5lfv" path="res://WhiteDot.png" id="3_echl7"]
 [ext_resource type="Script" path="res://followCursor.gd" id="5_5gilb"]

@@ -36,7 +36,7 @@ void fragment() {
 	
 	vec3 fin = vec3(desat, desat, desat);
 	// Called for every pixel the material is visible on.
-	COLOR = vec4(fin, 1.0);
+	COLOR = vec4(desat,0.0,0.0, 1.0); //r -> ink strength
 }
 
 //void light() {

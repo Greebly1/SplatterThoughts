@@ -1,11 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwasdxyba3kqk"]
+[gd_scene load_steps=5 format=3 uid="uid://bwasdxyba3kqk"]
 
-[ext_resource type="Texture2D" uid="uid://c2vxcmw4ibop" path="res://WhiteDot512.png" id="1_0vljd"]
+[ext_resource type="Texture2D" uid="uid://t6l6ppgl7t4j" path="res://evilDot.png" id="1_0sb0x"]
+[ext_resource type="Shader" path="res://LayerMat.gdshader" id="1_oorv0"]
 [ext_resource type="Script" path="res://LiveOneFrame.gd" id="2_usoom"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8r4cj"]
+shader = ExtResource("1_oorv0")
+shader_parameter/Albedo = Color(1, 0, 0, 1)
+
 [node name="Sprite2D" type="Sprite2D"]
-scale = Vector2(0.22, 0.22)
-texture = ExtResource("1_0vljd")
+material = SubResource("ShaderMaterial_8r4cj")
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_0sb0x")
 
 [node name="Node" type="Node" parent="."]
 script = ExtResource("2_usoom")
