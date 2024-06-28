@@ -43,5 +43,5 @@ void fragment() {
 	finColor = lighten(finColor, displace(power, LEFT, SCREEN_TEXTURE, SCREEN_UV, noise));
 	finColor = lighten(finColor, displace(power, RIGHT, SCREEN_TEXTURE, SCREEN_UV, noise));
 	
-	COLOR = vec4(finColor, 1.0);
+	COLOR = vec4(finColor*0.995, 1.0);
 }
