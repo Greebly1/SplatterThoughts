@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c7tql6s6xer8s"]
 
 [ext_resource type="Script" path="res://paint_4.gd" id="1_tt7cb"]
-[ext_resource type="Shader" path="res://invertCanvas.gdshader" id="2_2cd8o"]
+[ext_resource type="Shader" path="res://LayerMat.gdshader" id="2_2cd8o"]
 [ext_resource type="Script" path="res://Paint_4CanvasManager.gd" id="3_c6lah"]
 [ext_resource type="PackedScene" uid="uid://bqtyhv1qssoph" path="res://canvas.tscn" id="4_b0fj2"]
 [ext_resource type="Texture2D" uid="uid://5841oq4xcikv" path="res://paper.jpg" id="6_bsw2f"]
