@@ -20,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dssfa")
 canvas_manager = NodePath("CanvasManager")
-flowDistance = 5.0
+flowDistance = 1.0
 layerMaterial = SubResource("ShaderMaterial_ud4tg")
 
 [node name="CanvasManager" type="Control" parent="." node_paths=PackedStringArray("all_canvases")]

@@ -7,7 +7,7 @@
 colors = PackedColorArray(0.273873, 0.273873, 0.273873, 1, 0.707967, 0.707966, 0.707966, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vefgt"]
-frequency = 0.0185
+frequency = 0.0207
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8ejrk"]
 width = 800

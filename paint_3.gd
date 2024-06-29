@@ -3,10 +3,13 @@ extends Control
 @export var canvas_manager : CanvasManager
 @export var flowDistance : float = 3
 @export var layerMaterial : Material
+@export var brush_noise : Noise #used for changing brush settings from the cpu using the brush position
+var paint_count : int = 0
 var layers : Array[TextureRect] = []
 var last_splotch_position : Vector2 = Vector2(0,0)
 var brushActive : bool = false
 var currentCanvas : PaintingCanvas = null
+
 
 func _ready():
 	preparePainting()
@@ -34,6 +37,7 @@ func _process(delta):
 
 func paint(paint_position: Vector2):
 	currentCanvas.placePaint(paint_position)
+	paint_count = paint_count + 1
 	last_splotch_position = paint_position
 
 func preparePainting():

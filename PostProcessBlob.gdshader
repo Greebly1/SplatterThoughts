@@ -18,30 +18,15 @@ float desaturate(vec3 Color) {
 	return ( Color.r + Color.g + Color.b ) / 3.0;
 }
 
-vec3 darken(vec3 a, vec3 b) {
-	if (desaturate(a) > desaturate(b)) {
-		return b;
-	} else {
-		return a;
-	}
-}
-
-vec3 lighten(vec3 a, vec3 b) {
-		if (desaturate(a) < desaturate(b)) {
-		return b;
-	} else {
-		return a;
-	}
-}
-
 void fragment() {
+	//float pixel_ink_strength = texture(SCREEN_TEXTURE, SCREEN_UV).r;
 	float noise = texture(displaceNoise, UV).r;
 	
-	vec3 finColor = texture(SCREEN_TEXTURE, SCREEN_UV).rgb;
-	finColor = lighten(finColor, displace(power, UP, SCREEN_TEXTURE, SCREEN_UV, noise));
-	finColor = lighten(finColor, displace(power, DOWN, SCREEN_TEXTURE, SCREEN_UV, noise));
-	finColor = lighten(finColor, displace(power, LEFT, SCREEN_TEXTURE, SCREEN_UV, noise));
-	finColor = lighten(finColor, displace(power, RIGHT, SCREEN_TEXTURE, SCREEN_UV, noise));
+	float finColor = texture(SCREEN_TEXTURE, SCREEN_UV).r;
+	finColor = max(finColor, displace(power, UP, SCREEN_TEXTURE, SCREEN_UV, noise).r);
+	finColor = max(finColor, displace(power, DOWN, SCREEN_TEXTURE, SCREEN_UV, noise).r);
+	finColor = max(finColor, displace(power, LEFT, SCREEN_TEXTURE, SCREEN_UV, noise).r);
+	finColor = max(finColor, displace(power, RIGHT, SCREEN_TEXTURE, SCREEN_UV, noise).r);
 	
-	COLOR = vec4(finColor*0.995, 1.0);
+	COLOR = vec4(finColor * 0.98, 0.0, 0.0, 1.0);
 }

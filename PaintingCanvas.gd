@@ -23,7 +23,7 @@ func _ready():
 
 func placePaint(pos : Vector2):
 	var instance = splotchPrefab.instantiate()
-	instance.position = pos
+	instance.set_position(pos);
 	add_child(instance)
 	
 func releaseLayer():

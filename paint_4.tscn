@@ -8,6 +8,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ts6xw"]
 shader = ExtResource("2_2cd8o")
+shader_parameter/Albedo = Color(0, 0, 0, 1)
+shader_parameter/alpha = 1.0
 
 [node name="Paint4" type="Control" node_paths=PackedStringArray("canvas_manager")]
 layout_mode = 3
@@ -18,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tt7cb")
 canvas_manager = NodePath("CanvasPool")
-flowDistance = 20.0
+flowDistance = 14.0
 layerMaterial = SubResource("ShaderMaterial_ts6xw")
 
 [node name="CanvasPool" type="Control" parent="." node_paths=PackedStringArray("all_canvases")]

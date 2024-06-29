@@ -1,12 +1,8 @@
-extends Control
+extends CanvasLayer
+class_name Splotch
 
-@export
-var time_to_live : float = 4.0
-var time_alive : float = 0.0
+@export var splotches : Array[Node]
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	time_alive += delta
-	if time_alive >= time_to_live:
-		print("destroyed splotch")
-		self.queue_free()
+func set_position(pos : Vector2):
+	for splotch : Node in splotches:
+		splotch.position = pos
