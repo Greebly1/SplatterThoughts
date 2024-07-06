@@ -10,6 +10,7 @@ var size : float = 0.2:
 	set(new_size):
 		size = new_size
 		emit_signal('brush_settings_changed')
+		print(new_size)
 var color : Color = Color.REBECCA_PURPLE:
 	set(new_color):
 		color = new_color
@@ -17,6 +18,7 @@ var color : Color = Color.REBECCA_PURPLE:
 var mask : Texture2D;
 
 func _ready():
+	print(size)
 	pass # Replace with function body.
 
 

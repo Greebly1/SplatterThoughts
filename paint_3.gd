@@ -45,7 +45,7 @@ func preparePainting():
 	var newLayer = PaintLayer.new()
 	var newLayerName : String = "layer{num}".format({"num": layers.size() + 1})
 	newLayer.name = newLayerName
-	LayerStack.add_child(newLayer)
+	#LayerStack.add_child(newLayer)
 	newLayer.set_anchors_preset(Control.PRESET_FULL_RECT)
 	newLayer.size = $UI/Viewport.size #set new layer to full size of screen
 	layerMaterial.set_shader_parameter('Albedo', BrushSettings.color)

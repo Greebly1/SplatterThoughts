@@ -14,3 +14,7 @@ func get_empty_canvas():
 	
 	return null #there are no canvases that can be used right now
 	#TODO create a new canvas if we are out, similar to a dynamic object pool
+
+func set_canvas_size(new_size : Vector2i):
+	for canvas : PaintingCanvas in all_canvases:
+		canvas.set_image_size(new_size)

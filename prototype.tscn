@@ -1,0 +1,183 @@
+[gd_scene load_steps=12 format=3 uid="uid://djjh7pq4da0ss"]
+
+[ext_resource type="LabelSettings" uid="uid://bjejv86pdqlv1" path="res://Data/TextStyle.tres" id="1_agb73"]
+[ext_resource type="Script" path="res://GameInstance.gd" id="1_l1jq4"]
+[ext_resource type="Script" path="res://Painter.gd" id="2_gbys0"]
+[ext_resource type="Script" path="res://CanvasManager.gd" id="2_h02yj"]
+[ext_resource type="Script" path="res://SettingsBar.gd" id="2_ig08v"]
+[ext_resource type="Script" path="res://View.gd" id="2_oajad"]
+[ext_resource type="Texture2D" uid="uid://5841oq4xcikv" path="res://paper.jpg" id="3_c47mk"]
+[ext_resource type="PackedScene" uid="uid://bqtyhv1qssoph" path="res://canvas.tscn" id="3_quj4u"]
+[ext_resource type="Shader" path="res://LayerMat.gdshader" id="5_iob5w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s4cu5"]
+content_margin_left = 3.0
+bg_color = Color(0, 0, 0, 0.266667)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cn6in"]
+shader = ExtResource("5_iob5w")
+shader_parameter/Albedo = Color(0, 0, 0, 1)
+shader_parameter/alpha = 1.0
+
+[node name="Game" type="Control" node_paths=PackedStringArray("painter")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l1jq4")
+painter = NodePath("Painter")
+
+[node name="TopBar" type="ColorRect" parent="." node_paths=PackedStringArray("sizeEdit")]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.999
+anchor_bottom = 0.076
+offset_right = 1.15186
+offset_bottom = -0.248005
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0.368627, 0.341176)
+script = ExtResource("2_ig08v")
+sizeEdit = NodePath("HBox/Size/LineEdit")
+
+[node name="HBox" type="HBoxContainer" parent="TopBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 7.0
+offset_right = -0.800049
+offset_bottom = -6.6
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+size_flags_stretch_ratio = 4.6
+
+[node name="Size" type="ColorRect" parent="TopBar/HBox"]
+custom_minimum_size = Vector2(111.83, 0)
+layout_mode = 2
+color = Color(0, 0, 0, 0.368627)
+
+[node name="Label" type="Label" parent="TopBar/HBox/Size"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -1.0
+offset_right = -42.585
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Size:"
+label_settings = ExtResource("1_agb73")
+vertical_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="TopBar/HBox/Size"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 55.0
+offset_top = 3.0
+offset_right = 106.0
+offset_bottom = -3.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/minimum_character_width = 0
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_s4cu5")
+text = "20"
+max_length = 3
+
+[node name="Painter" type="Control" parent="." node_paths=PackedStringArray("canvas_manager", "Canvas_Viewport")]
+layout_mode = 1
+anchor_top = 0.076
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.248005
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_gbys0")
+canvas_manager = NodePath("CanvasManager")
+flowDistance = 20.0
+Canvas_Viewport = NodePath("Main_Viewport")
+
+[node name="Main_Viewport" type="Control" parent="Painter"]
+layout_mode = 1
+anchor_bottom = 1.0
+offset_right = 900.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_oajad")
+layerMaterial = SubResource("ShaderMaterial_cn6in")
+
+[node name="Background" type="TextureRect" parent="Painter/Main_Viewport"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_c47mk")
+expand_mode = 2
+
+[node name="LayerContainer" type="Control" parent="Painter/Main_Viewport"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasManager" type="Control" parent="Painter" node_paths=PackedStringArray("all_canvases")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_h02yj")
+all_canvases = [NodePath("Canvas1"), NodePath("Canvas2"), NodePath("Canvas3"), NodePath("Canvas4"), NodePath("Canvas5")]
+
+[node name="Canvas1" parent="Painter/CanvasManager" instance=ExtResource("3_quj4u")]
+transparent_bg = true
+
+[node name="Canvas2" parent="Painter/CanvasManager" instance=ExtResource("3_quj4u")]
+
+[node name="Canvas3" parent="Painter/CanvasManager" instance=ExtResource("3_quj4u")]
+
+[node name="Canvas4" parent="Painter/CanvasManager" instance=ExtResource("3_quj4u")]
+
+[node name="Canvas5" parent="Painter/CanvasManager" instance=ExtResource("3_quj4u")]
+
+[node name="LayerStack" type="Control" parent="Painter"]
+layout_mode = 1
+anchor_left = 0.924
+anchor_top = 0.076
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.552002
+offset_top = -0.248005
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Painter/LayerStack"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.082
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.405369
+offset_bottom = 0.276001
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.707946, 0, 0.322797, 1)
+
+[connection signal="beginPaint" from="." to="Painter" method="onBeginPaint"]
+[connection signal="text_submitted" from="TopBar/HBox/Size/LineEdit" to="TopBar" method="onSizeChanged"]

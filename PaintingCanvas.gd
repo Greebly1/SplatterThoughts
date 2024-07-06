@@ -18,7 +18,6 @@ var inkAccumulation : float = 0
 func _ready():
 	pass
 	render_target_clear_mode = SubViewport.CLEAR_MODE_NEVER
-	get_viewport().size = DisplayServer.window_get_size()
 	#TODO when subviewports are made they must set their size to be within the aspect ratio of the monitor
 
 func placePaint(pos : Vector2):
@@ -30,15 +29,13 @@ func placePaint(pos : Vector2):
 func releaseLayer():
 	if (isCaptured && layer != null) :
 		var img = get_viewport().get_texture().get_image()
-		img.flip_y()
 		layer.layer_texture = ImageTexture.create_from_image(img)
 
 #unlinks the layer, and clears the render texture
 #call this to make a canvas stop doing work and re enter the available canvas pool
 func reset():
-	layer.ReleaseCanvas()
 	layer = null
-	pass
+	isCaptured = false
 	
 func beginInk():
 	inkEffectTimer.wait_time = inkEffectData.duration
@@ -48,15 +45,15 @@ func beginInk():
 	lastTimeInked = 0
 
 func inkEnded():
-	layer.ReleaseCanvas()
+	releaseLayer()
 	clearCanvas()
+	isCaptured = false
 	pass
 
 #flashes a color rect to essentially clear the screen
 func clearCanvas():
 	var canvasClear = canvasClearRect.instantiate()
 	add_child(canvasClear)
-	pass
 
 func _process(delta):
 	if (inkEffectActive):
@@ -77,3 +74,6 @@ func _process(delta):
 		
 		lastTimeInked = thisFrameTime
 	pass
+
+func set_image_size(new_size : Vector2i):
+	get_viewport().size = new_size
