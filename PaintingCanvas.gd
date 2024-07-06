@@ -22,8 +22,9 @@ func _ready():
 	#TODO when subviewports are made they must set their size to be within the aspect ratio of the monitor
 
 func placePaint(pos : Vector2):
-	var instance = splotchPrefab.instantiate()
-	instance.set_position(pos);
+	var instance : Splotch = splotchPrefab.instantiate() as Splotch
+	instance.set_position(pos)
+	instance.set_size(BrushSettings.size)
 	add_child(instance)
 	
 func releaseLayer():

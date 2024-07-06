@@ -1,15 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvjn3d6nspqxr"]
+[gd_scene load_steps=10 format=3 uid="uid://dvjn3d6nspqxr"]
 
 [ext_resource type="Script" path="res://paint_3.gd" id="1_dssfa"]
 [ext_resource type="Texture2D" uid="uid://5841oq4xcikv" path="res://paper.jpg" id="1_e2x1s"]
 [ext_resource type="Shader" path="res://LayerMat.gdshader" id="2_ggeid"]
 [ext_resource type="Script" path="res://CanvasManager.gd" id="3_c6ium"]
 [ext_resource type="PackedScene" uid="uid://bqtyhv1qssoph" path="res://canvas.tscn" id="4_j2ffb"]
+[ext_resource type="Script" path="res://UI_Manager.gd" id="5_86l3f"]
+[ext_resource type="LabelSettings" uid="uid://bjejv86pdqlv1" path="res://Data/TextStyle.tres" id="6_hnkw0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ud4tg"]
 shader = ExtResource("2_ggeid")
 shader_parameter/Albedo = Color(0, 0, 0.0627451, 1)
 shader_parameter/alpha = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ji7o3"]
+content_margin_left = 3.0
+bg_color = Color(0, 0, 0, 0.266667)
 
 [node name="Paint3" type="Control" node_paths=PackedStringArray("canvas_manager")]
 layout_mode = 3
@@ -44,7 +50,79 @@ transparent_bg = true
 
 [node name="Canvas5" parent="CanvasManager" instance=ExtResource("4_j2ffb")]
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("5_86l3f")
+
+[node name="ColorRect" type="ColorRect" parent="UI"]
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.025
+anchor_right = 0.95
+anchor_bottom = 0.025
+offset_bottom = 48.6
+grow_horizontal = 2
+color = Color(0, 0, 0.368627, 0.341176)
+
+[node name="TopBar" type="HBoxContainer" parent="UI/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 7.0
+offset_right = -0.800049
+offset_bottom = -6.6
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+size_flags_stretch_ratio = 4.6
+
+[node name="ColorRect" type="ColorRect" parent="UI/ColorRect/TopBar"]
+custom_minimum_size = Vector2(93.585, 0)
+layout_mode = 2
+color = Color(0, 0, 0, 0.368627)
+
+[node name="Label" type="Label" parent="UI/ColorRect/TopBar/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -1.0
+offset_right = -42.585
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " Size:"
+label_settings = ExtResource("6_hnkw0")
+vertical_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="UI/ColorRect/TopBar/ColorRect"]
+layout_mode = 0
+offset_left = 55.4
+offset_top = 2.8
+offset_right = 92.4
+offset_bottom = 31.8
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/minimum_character_width = 0
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_ji7o3")
+text = "20"
+max_length = 3
+
+[node name="Viewport" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 65.0
+offset_right = -116.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="UI/Viewport"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,11 +131,3 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_e2x1s")
 expand_mode = 2
-
-[node name="LayerContainer" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2

@@ -2,7 +2,7 @@ extends Control
 
 @export var canvas_manager : CanvasManager
 @export var flowDistance : float = 3
-@export var layerMaterial : Material
+@export var layerMaterial : ShaderMaterial
 @export var brush_noise : Noise #used for changing brush settings from the cpu using the brush position
 var paint_count : int = 0
 var layers : Array[TextureRect] = []
@@ -45,9 +45,10 @@ func preparePainting():
 	var newLayer = PaintLayer.new()
 	var newLayerName : String = "layer{num}".format({"num": layers.size() + 1})
 	newLayer.name = newLayerName
-	$LayerContainer.add_child(newLayer)
+	LayerStack.add_child(newLayer)
 	newLayer.set_anchors_preset(Control.PRESET_FULL_RECT)
-	newLayer.size = $LayerContainer.size #set new layer to full size of screen
+	newLayer.size = $UI/Viewport.size #set new layer to full size of screen
+	layerMaterial.set_shader_parameter('Albedo', BrushSettings.color)
 	newLayer.material = layerMaterial
 	layers.append(newLayer)
 	
