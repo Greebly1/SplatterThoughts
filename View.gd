@@ -12,7 +12,6 @@ var layers : Array[TextureRect] :
 				layerArr.append(node)
 		return layerArr
 
-
 func CreateLayer() -> PaintLayer:
 	var newLayer = PaintLayer.new()
 	var newLayerName : String = "layer{num}".format({"num": layers.size() + 1})
@@ -24,3 +23,7 @@ func CreateLayer() -> PaintLayer:
 	newLayer.material = layerMaterial
 	layers.append(newLayer)
 	return newLayer
+	
+func RecalculateSize():
+	print("dooee")
+	custom_minimum_size.x = $"../..".size.y * 1.5

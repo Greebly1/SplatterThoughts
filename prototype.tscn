@@ -105,35 +105,7 @@ grow_vertical = 2
 script = ExtResource("2_gbys0")
 canvas_manager = NodePath("CanvasManager")
 flowDistance = 20.0
-Canvas_Viewport = NodePath("Main_Viewport")
-
-[node name="Main_Viewport" type="Control" parent="Painter"]
-layout_mode = 1
-anchor_bottom = 1.0
-offset_right = 900.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("2_oajad")
-layerMaterial = SubResource("ShaderMaterial_cn6in")
-
-[node name="Background" type="TextureRect" parent="Painter/Main_Viewport"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_c47mk")
-expand_mode = 2
-
-[node name="LayerContainer" type="Control" parent="Painter/Main_Viewport"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+Canvas_Viewport = NodePath("HBoxContainer/Main_Viewport")
 
 [node name="CanvasManager" type="Control" parent="Painter" node_paths=PackedStringArray("all_canvases")]
 layout_mode = 1
@@ -156,28 +128,55 @@ transparent_bg = true
 
 [node name="Canvas5" parent="Painter/CanvasManager" instance=ExtResource("3_quj4u")]
 
-[node name="LayerStack" type="Control" parent="Painter"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Painter"]
+layout_direction = 2
 layout_mode = 1
-anchor_left = 0.924
-anchor_top = 0.076
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 0.552002
-offset_top = -0.248005
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Main_Viewport" type="Control" parent="Painter/HBoxContainer"]
+custom_minimum_size = Vector2(600.1, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+script = ExtResource("2_oajad")
+layerMaterial = SubResource("ShaderMaterial_cn6in")
+
+[node name="Background" type="TextureRect" parent="Painter/HBoxContainer/Main_Viewport"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_c47mk")
+expand_mode = 2
+
+[node name="LayerContainer" type="Control" parent="Painter/HBoxContainer/Main_Viewport"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="Painter/LayerStack"]
+[node name="LayerStack" type="Control" parent="Painter/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorRect" type="ColorRect" parent="Painter/HBoxContainer/LayerStack"]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = -0.082
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 0.405369
-offset_bottom = 0.276001
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.707946, 0, 0.322797, 1)
 
 [connection signal="beginPaint" from="." to="Painter" method="onBeginPaint"]
 [connection signal="text_submitted" from="TopBar/HBox/Size/LineEdit" to="TopBar" method="onSizeChanged"]
+[connection signal="resized" from="Painter" to="Painter/HBoxContainer/Main_Viewport" method="RecalculateSize"]
