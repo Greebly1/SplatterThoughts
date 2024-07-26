@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbitrbwbybclr"]
+
+[ext_resource type="Shader" path="res://Background.gdshader" id="1_7t3u7"]
+[ext_resource type="Texture2D" uid="uid://c550uu12a0uqi" path="res://icon.svg" id="2_egcyp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uqrdk"]
+shader = ExtResource("1_7t3u7")
+shader_parameter/density = 34.0
+shader_parameter/innerradius = 0.02
+shader_parameter/outerradiuss = 0.17
+shader_parameter/albedo = Color(0.752637, 0.711187, 0.739085, 1)
+shader_parameter/translation = Vector2(2.34, -2.995)
+shader_parameter/translationScalar = 1.0
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.202001, 0.169709, 0.322262, 1)
+
+[node name="Dots" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_uqrdk")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 2.0
+offset_right = -1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_egcyp")
