@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhflskhakglax"]
+
+[ext_resource type="Script" path="res://MaskingViewport.gd" id="1_sn8x6"]
+
+[node name="SubViewport" type="SubViewport"]
+transparent_bg = true
+script = ExtResource("1_sn8x6")

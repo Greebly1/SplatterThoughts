@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://kv6jpoccus7c"]
+
+[ext_resource type="Script" path="res://Splotch.gd" id="1_u32y4"]
+[ext_resource type="Script" path="res://LiveOneFrame.gd" id="2_hun28"]
+[ext_resource type="Shader" path="res://maskingdot.gdshader" id="3_bx68x"]
+[ext_resource type="Texture2D" uid="uid://c5oybf54tbmwn" path="res://greencircle.png" id="4_myuy5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vcbqc"]
+shader = ExtResource("3_bx68x")
+
+[node name="Sprite2D" type="CanvasLayer" node_paths=PackedStringArray("splotches")]
+script = ExtResource("1_u32y4")
+splotches = [NodePath("Sprite2D")]
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("2_hun28")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_vcbqc")
+texture = ExtResource("4_myuy5")

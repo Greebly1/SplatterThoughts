@@ -18,3 +18,4 @@ func get_empty_canvas():
 func set_canvas_size(new_size : Vector2i):
 	for canvas : PaintingCanvas in all_canvases:
 		canvas.set_image_size(new_size)
+	MaskingCanvas.set_image_size(new_size)

@@ -17,6 +17,9 @@ const ASPECT_RATIO : Vector2i = Vector2i(3, 2)
 const RESOLUTION : int = 200
 @onready var canvas_size : Vector2i = ASPECT_RATIO * RESOLUTION
 
+var useMaskingCanvas : bool = true
+var eraseActive : bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	canvas_manager.set_canvas_size(canvas_size)
@@ -31,9 +34,9 @@ func _process(delta):
 	
 		if Input.is_action_just_released("click"):
 			brushActive = false # painting ended this frame
-			currentCanvas.beginInk()
-			#TODO before preparing the next layer, tell the canvas that the paint stroke is over
-			preparePainting() #prepare the painting for the next paint stroke
+			if not useMaskingCanvas:
+				currentCanvas.beginInk()
+				preparePainting() #prepare the painting for the next paint stroke
 		else:
 			while (mouse_position - last_splotch_position).length() >= flowDistance:
 				paintSplotchAtPosition(last_splotch_position + ((mouse_position - last_splotch_position).normalized() * flowDistance))
@@ -64,14 +67,20 @@ func paintSplotchAtPosition(position : Vector2):
 	var ViewportSize = Canvas_Viewport.get_rect().size
 	var ViewportAspectRatio = ViewportSize.x/ViewportSize.y
 	var CanvasSize = currentCanvas.size
+	if (useMaskingCanvas):
+		CanvasSize = MaskingCanvas.size
 	var CanvasAspectRatio : float = CanvasSize.x as float/CanvasSize.y as float
 	
 	var normalizePosition = position/ViewportSize
 	var positionOnCanvas = normalizePosition * (CanvasSize as Vector2)
 	
-	currentCanvas.placePaint(positionOnCanvas)
+	if (useMaskingCanvas):
+		if eraseActive:
+			MaskingCanvas.eraseHere(positionOnCanvas)
+		else:
+			MaskingCanvas.placePaint(positionOnCanvas)
+	else:
+		currentCanvas.placePaint(positionOnCanvas)
 	paint_count = paint_count + 1
 	last_splotch_position = position
-	
-	#print("pos ", position, " | NP ", normalizePosition, "| AP ", positionOnCanvas, " | VPS ", ViewportSize, " | VPAR ", ViewportAspectRatio, " | CS ", CanvasSize, " | CSAR ", CanvasAspectRatio)
 	

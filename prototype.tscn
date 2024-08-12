@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://djjh7pq4da0ss"]
+[gd_scene load_steps=15 format=3 uid="uid://l6xfvohh4yrh"]
 
 [ext_resource type="LabelSettings" uid="uid://bjejv86pdqlv1" path="res://Data/TextStyle.tres" id="1_agb73"]
 [ext_resource type="Script" path="res://GameInstance.gd" id="1_l1jq4"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://5841oq4xcikv" path="res://paper.jpg" id="3_c47mk"]
 [ext_resource type="PackedScene" uid="uid://bqtyhv1qssoph" path="res://canvas.tscn" id="3_quj4u"]
 [ext_resource type="Shader" path="res://LayerMat.gdshader" id="5_iob5w"]
+[ext_resource type="Shader" path="res://maskviewer.gdshader" id="10_4tgns"]
+[ext_resource type="Script" path="res://MaskView.gd" id="10_7o6hu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s4cu5"]
 content_margin_left = 3.0
@@ -18,6 +20,9 @@ bg_color = Color(0, 0, 0, 0.266667)
 shader = ExtResource("5_iob5w")
 shader_parameter/Albedo = Color(0, 0, 0, 1)
 shader_parameter/alpha = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0lwpc"]
+shader = ExtResource("10_4tgns")
 
 [node name="Game" type="Control" node_paths=PackedStringArray("painter")]
 layout_mode = 3
@@ -162,6 +167,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MaskView" type="TextureRect" parent="Painter/HBoxContainer/Main_Viewport"]
+material = SubResource("ShaderMaterial_0lwpc")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_7o6hu")
 
 [node name="LayerStack" type="Control" parent="Painter/HBoxContainer"]
 layout_direction = 2

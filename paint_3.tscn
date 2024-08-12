@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://CanvasManager.gd" id="3_c6ium"]
 [ext_resource type="PackedScene" uid="uid://bqtyhv1qssoph" path="res://canvas.tscn" id="4_j2ffb"]
 [ext_resource type="Script" path="res://UI_Manager.gd" id="5_86l3f"]
-[ext_resource type="LabelSettings" uid="uid://bjejv86pdqlv1" path="res://Data/TextStyle.tres" id="6_hnkw0"]
+[ext_resource type="LabelSettings" path="res://Data/TextStyle.tres" id="6_hnkw0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ud4tg"]
 shader = ExtResource("2_ggeid")
@@ -25,9 +25,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dssfa")
-canvas_manager = NodePath("CanvasManager")
 flowDistance = 1.0
 layerMaterial = SubResource("ShaderMaterial_ud4tg")
+canvas_manager = NodePath("CanvasManager")
 
 [node name="CanvasManager" type="Control" parent="." node_paths=PackedStringArray("all_canvases")]
 layout_mode = 1

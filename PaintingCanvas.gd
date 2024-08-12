@@ -16,7 +16,6 @@ var lastTimeInked : float = 0
 var inkAccumulation : float = 0
 
 func _ready():
-	pass
 	render_target_clear_mode = SubViewport.CLEAR_MODE_NEVER
 	#TODO when subviewports are made they must set their size to be within the aspect ratio of the monitor
 
